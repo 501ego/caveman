@@ -218,7 +218,7 @@ Code blocks, URLs, file paths, commands, headings, dates, version numbers — an
 
 ### /compact command
 
-`/compact` — automatically compresses `CLAUDE.md` with caveman-compress first, then compacts session. One command. Cost go down forever.
+`/compact` — automatically compresses `CLAUDE.md` with caveman-compress before compacting. Next session loads smaller file. One command. Cost go down forever.
 
 > [!IMPORTANT]
 > Caveman only affects output tokens — thinking/reasoning tokens are untouched. Caveman no make brain smaller. Caveman make *mouth* smaller. Biggest win is **readability and speed**, cost savings are a bonus.

@@ -33,16 +33,12 @@ process.stdin.on('end', () => {
     // Match /caveman commands
     if (prompt.startsWith('/caveman')) {
       const parts = prompt.split(/\s+/);
-      const cmd = parts[0]; // /caveman, /caveman-commit, /caveman-review, etc.
+      const cmd = parts[0]; // /caveman, /caveman-compress, etc.
       const arg = parts[1] || '';
 
       let mode = null;
 
-      if (cmd === '/caveman-commit') {
-        mode = 'commit';
-      } else if (cmd === '/caveman-review') {
-        mode = 'review';
-      } else if (cmd === '/caveman-compress' || cmd === '/caveman:caveman-compress') {
+      if (cmd === '/caveman-compress' || cmd === '/caveman:caveman-compress') {
         mode = 'compress';
       } else if (cmd === '/caveman' || cmd === '/caveman:caveman') {
         if (arg === 'lite') mode = 'lite';
@@ -72,13 +68,12 @@ process.stdin.on('end', () => {
     // when other plugins inject competing style instructions every turn.
     // This keeps caveman visible in the model's attention on every user message.
     //
-    // Skip independent modes (commit, review, compress) — they have their own
-    // skill behavior and the base caveman rules would conflict.
+    // Skip compress mode — it has its own skill behavior and base rules would conflict.
     // readFlag enforces symlink-safe read + size cap + VALID_MODES whitelist.
     // If the flag is missing, corrupted, oversized, or a symlink pointing at
     // something like ~/.ssh/id_rsa, readFlag returns null and we emit nothing
     // — never inject untrusted bytes into model context.
-    const INDEPENDENT_MODES = new Set(['commit', 'review', 'compress']);
+    const INDEPENDENT_MODES = new Set(['compress']);
     const activeMode = readFlag(flagPath);
     if (activeMode && !INDEPENDENT_MODES.has(activeMode)) {
       process.stdout.write(JSON.stringify({

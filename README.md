@@ -152,7 +152,7 @@ Uninstall: `bash hooks/uninstall.sh` or `powershell -File hooks\uninstall.ps1`
 | Mode switching (lite/full/ultra) | ✓ |
 | Statusline badge `[CAVEMAN]` | ✓ |
 | caveman-compress | ✓ |
-| `/compact` command (compress + compact) | ✓ |
+| `/compact` auto-compresses before compacting | ✓ |
 
 **Statusline badge:** Shows `[CAVEMAN]`, `[CAVEMAN:ULTRA]`, etc. in your Claude Code status bar.
 
@@ -218,7 +218,7 @@ Code blocks, URLs, file paths, commands, headings, dates, version numbers — an
 
 ### /compact command
 
-`/compact` — compress Markdown context with caveman-compress, then compact session. Cost go down forever.
+`/compact` — automatically compresses `CLAUDE.md` with caveman-compress first, then compacts session. One command. Cost go down forever.
 
 > [!IMPORTANT]
 > Caveman only affects output tokens — thinking/reasoning tokens are untouched. Caveman no make brain smaller. Caveman make *mouth* smaller. Biggest win is **readability and speed**, cost savings are a bonus.

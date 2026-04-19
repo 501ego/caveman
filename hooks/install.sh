@@ -37,7 +37,7 @@ HOOKS_DIR="$CLAUDE_DIR/hooks"
 SETTINGS="$CLAUDE_DIR/settings.json"
 REPO_URL="https://raw.githubusercontent.com/501ego/caveman/main/hooks"
 
-HOOK_FILES=("package.json" "caveman-config.js" "caveman-activate.js" "caveman-mode-tracker.js" "caveman-statusline.sh")
+HOOK_FILES=("package.json" "caveman-config.js" "caveman-activate.js" "caveman-mode-tracker.js" "caveman-precompact.js" "caveman-statusline.sh")
 
 # Resolve source — works from repo clone or curl pipe
 SCRIPT_DIR=""
@@ -162,6 +162,22 @@ CAVEMAN_SETTINGS="$SETTINGS" CAVEMAN_HOOKS_DIR="$HOOKS_DIR" node -e "
         command: 'node \"' + hooksDir + '/caveman-mode-tracker.js\"',
         timeout: 5,
         statusMessage: 'Tracking caveman mode...'
+      }]
+    });
+  }
+
+  // PreCompact — compress CLAUDE.md before context compaction
+  if (!settings.hooks.PreCompact) settings.hooks.PreCompact = [];
+  const hasPreCompact = settings.hooks.PreCompact.some(e =>
+    e.hooks && e.hooks.some(h => h.command && h.command.includes('caveman'))
+  );
+  if (!hasPreCompact) {
+    settings.hooks.PreCompact.push({
+      hooks: [{
+        type: 'command',
+        command: 'node \"' + hooksDir + '/caveman-precompact.js\"',
+        timeout: 30,
+        statusMessage: 'Compressing context files...'
       }]
     });
   }

@@ -156,9 +156,8 @@ Uninstall: `bash hooks/uninstall.sh` or `powershell -File hooks\uninstall.ps1`
 
 **Statusline badge:** Shows `[CAVEMAN]`, `[CAVEMAN:ULTRA]`, etc. in your Claude Code status bar.
 
-- **Plugin install:** If you do not already have a custom `statusLine`, Claude should offer to configure it on first session
-- **Standalone install:** Configured automatically by `install.sh` / `install.ps1` unless you already have a custom statusline
-- **Custom statusline:** Installer leaves your existing statusline alone. See [`hooks/README.md`](hooks/README.md) for the merge snippet
+- **No existing statusline:** installer wires the badge automatically
+- **Existing statusline (e.g. claude-hud):** installer skips — badge won't show. See [`hooks/README.md`](hooks/README.md) to add it manually
 
 ## Usage
 

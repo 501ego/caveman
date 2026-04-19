@@ -3,8 +3,8 @@
   "name": "caveman",
   "description": "Ultra-compressed communication mode for Claude Code. Cuts ~75% of tokens while keeping full technical accuracy.",
   "owner": {
-    "name": "Julius Brussee",
-    "url": "https://github.com/JuliusBrussee"
+    "name": "501ego",
+    "url": "https://github.com/501ego"
   },
   "plugins": [
     {

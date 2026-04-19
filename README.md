@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/JuliusBrussee/caveman/stargazers"><img src="https://img.shields.io/github/stars/JuliusBrussee/caveman?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/JuliusBrussee/caveman/commits/main"><img src="https://img.shields.io/github/last-commit/JuliusBrussee/caveman?style=flat" alt="Last Commit"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/JuliusBrussee/caveman?style=flat" alt="License"></a>
+  <a href="https://github.com/501ego/caveman/stargazers"><img src="https://img.shields.io/github/stars/501ego/caveman?style=flat&color=yellow" alt="Stars"></a>
+  <a href="https://github.com/501ego/caveman/commits/main"><img src="https://img.shields.io/github/last-commit/501ego/caveman?style=flat" alt="Last Commit"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/501ego/caveman?style=flat" alt="License"></a>
 </p>
 
 <p align="center">
@@ -19,13 +19,6 @@
   <a href="#install">Install</a> •
   <a href="#intensity-levels">Levels</a> •
   <a href="#caveman-compress">Compress</a>
-</p>
-
-<p align="center">
-  <strong>🪨 Caveman Ecosystem</strong> &nbsp;·&nbsp;
-  <strong>caveman</strong> <em>talk less</em> <sub>(you are here)</sub> &nbsp;·&nbsp;
-  <a href="https://github.com/JuliusBrussee/cavemem">cavemem</a> <em>remember more</em> &nbsp;·&nbsp;
-  <a href="https://github.com/JuliusBrussee/cavekit">cavekit</a> <em>build better</em>
 </p>
 
 ---
@@ -130,7 +123,7 @@ Based on the viral observation that caveman-speak dramatically reduces LLM token
 One command. Done.
 
 ```bash
-claude plugin marketplace add JuliusBrussee/caveman
+claude plugin marketplace add 501ego/caveman
 claude plugin install caveman@caveman
 ```
 
@@ -139,10 +132,10 @@ Install once. Use in every session. One rock. That it.
 **Standalone hooks (without plugin):**
 ```bash
 # macOS / Linux / WSL
-bash <(curl -s https://raw.githubusercontent.com/JuliusBrussee/caveman/main/hooks/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/501ego/caveman/main/hooks/install.sh)
 
 # Windows (PowerShell)
-irm https://raw.githubusercontent.com/JuliusBrussee/caveman/main/hooks/install.ps1 | iex
+irm https://raw.githubusercontent.com/501ego/caveman/main/hooks/install.ps1 | iex
 ```
 
 Or from a local clone: `bash hooks/install.sh` / `powershell -File hooks\install.ps1`
@@ -236,23 +229,7 @@ A March 2026 paper ["Brevity Constraints Reverse Performance Hierarchies in Lang
 
 If caveman save you mass token, mass money — leave mass star. ⭐
 
-[![Star History Chart](https://api.star-history.com/svg?repos=JuliusBrussee/caveman&type=Date)](https://star-history.com/#JuliusBrussee/caveman&Date)
-
-## 🪨 The Caveman Ecosystem
-
-Three tools. One philosophy: **agent do more with less**.
-
-| Repo | What | One-liner |
-|------|------|-----------|
-| [**caveman**](https://github.com/JuliusBrussee/caveman) *(you are here)* | Output compression skill | *why use many token when few do trick* — ~65-75% fewer output tokens |
-| [**cavemem**](https://github.com/JuliusBrussee/cavemem) | Cross-agent persistent memory | *why agent forget when agent can remember* — compressed SQLite + MCP, local by default |
-| [**cavekit**](https://github.com/JuliusBrussee/cavekit) | Spec-driven autonomous build loop | *why agent guess when agent can know* — natural language → kits → parallel build → verified |
-
-They compose: **cavekit** orchestrates the build, **caveman** compresses what the agent *says*, **cavemem** compresses what the agent *remembers*. Install one, some, or all — each stands alone.
-
-## Also by Julius Brussee
-
-- **[Revu](https://github.com/JuliusBrussee/revu-swift)** — local-first macOS study app with FSRS spaced repetition, decks, exams, and study guides. [revu.cards](https://revu.cards)
+[![Star History Chart](https://api.star-history.com/svg?repos=501ego/caveman&type=Date)](https://star-history.com/#501ego/caveman&Date)
 
 ## License
 

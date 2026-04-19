@@ -5,10 +5,13 @@
 //   1. Writes flag file at $CLAUDE_CONFIG_DIR/.caveman-active (statusline reads this)
 //   2. Emits caveman ruleset as hidden SessionStart context
 //   3. Detects missing statusline config and emits setup nudge
+//   4. Background-compresses project CLAUDE.md if stale (hash-based, non-blocking)
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const crypto = require('crypto');
+const { spawn } = require('child_process');
 const { getDefaultMode, safeWriteFlag } = require('./caveman-config');
 
 const claudeDir = process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), '.claude');
@@ -138,6 +141,44 @@ try {
   }
 } catch (e) {
   // Silent fail — don't block session start over statusline detection
+}
+
+// 4. Background-compress project CLAUDE.md if content changed since last compress.
+//    Non-blocking: spawns python3 and detaches. Current session gets existing file;
+//    compressed version is ready for next session. Fast hash check avoids spawning
+//    when file is unchanged.
+try {
+  const projectClaudeMd = path.join(process.cwd(), 'CLAUDE.md');
+  const compressScriptDir = path.join(__dirname, '..', 'caveman-compress');
+
+  if (
+    fs.existsSync(projectClaudeMd) &&
+    fs.existsSync(path.join(compressScriptDir, 'scripts', '__main__.py'))
+  ) {
+    const content = fs.readFileSync(projectClaudeMd, 'utf8');
+    const currentHash = crypto.createHash('sha256').update(content).digest('hex');
+    const hashFile = projectClaudeMd + '.caveman-hash';
+
+    let storedHash = null;
+    try { storedHash = fs.readFileSync(hashFile, 'utf8').trim(); } catch (e) {}
+
+    if (storedHash !== currentHash) {
+      const child = spawn('python3', ['-m', 'scripts', projectClaudeMd], {
+        cwd: compressScriptDir,
+        detached: true,
+        stdio: 'ignore'
+      });
+      child.unref();
+
+      // Store hash of current (pre-compress) content so we don't re-spawn next session
+      // unless user edits the file again. Hash of compressed output would require waiting.
+      try { fs.writeFileSync(hashFile, currentHash, { mode: 0o600 }); } catch (e) {}
+
+      output += '\n\n[caveman] Compressing CLAUDE.md in background — smaller next session.';
+    }
+  }
+} catch (e) {
+  // Silent fail — never block session start
 }
 
 process.stdout.write(output);
